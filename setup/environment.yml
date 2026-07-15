@@ -1,0 +1,39 @@
+name: vla-zero
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch>=2.0.0
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=12.1
+  - numpy
+  - scipy
+  - matplotlib
+  - pillow
+  - opencv
+  - tqdm
+  - pip:
+    - transformers>=4.40.0
+    - accelerate
+    - datasets
+    - einops
+    - timm
+    - diffusers
+    - wandb
+    - hydra-core
+    - openvla
+    - huggingface-hub
+    - sentencepiece
+    - protobuf
+    - imageio
+    - gymnasium
+    - robosuite
+    - pybullet
+    - dm-control
+    - mujoco
+    - imageio-ffmpeg
