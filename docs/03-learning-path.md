@@ -209,11 +209,10 @@ data/my_robot/
 pip install libero
 
 # 使用本项目提供的微调脚本
-python tutorials/04-fine-tuning/finetune_openvla.py \
-    --pretrained_model openvla/openvla-7b \
-    --dataset libero \
-    --batch_size 8 \
-    --num_steps 5000
+python tutorials/04-fine-tuning/finetune_libero.py \
+    --vla_path openvla/openvla-7b \
+    --benchmark libero_spatial \
+    --max_steps 10000
 ```
 
 ### 任务 4.3: 评估与迭代

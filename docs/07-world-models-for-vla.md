@@ -446,14 +446,14 @@ World Action Model: p(o_{t+1}, a_{t+1} | o_t, a_t)  → 同时预测状态和动
 
 ### 第二步：理解世界模型的核心组件
 
-在 VLA 项目 docs/06 中有完整的世界模型理论介绍：
+在 VLA 项目 docs/07（即本文档）中有完整的世界模型理论介绍：
 
 ```bash
 # 阅读世界模型文档
 # 实际代码实现请参考 docs/07-world-models-for-vla.md 中引用的开源项目
 ```
 
-这个脚本实现了一个最简版的世界模型：
+本文档聚焦理论与论文导读，暂未附带完整的最简世界模型实现。建议读者作为练习自行实现一个最小化的 latent dynamics 模型：
 - 输入：当前观测 + 动作
 - 输出：预测的下一个观测
 - 训练目标：最小化预测观测和真实观测的差异（MSE）
@@ -466,7 +466,7 @@ World Action Model: p(o_{t+1}, a_{t+1} | o_t, a_t)  → 同时预测状态和动
 ### 第三步：读 IRIS 或 DIAMOND 源码
 
 - **IRIS**：[官方实现](https://github.com/janner/iris) — Transformer-based，代码结构清晰
-- **DIAMOND**：[官方实现](https://github.com/eliteraspberries/diamond) — Diffusion-based，可以对比与 Diffusion Policy 的架构异同
+- **DIAMOND**：[官方实现](https://github.com/ethz-rl/diamond) — Diffusion-based，可以对比与 Diffusion Policy 的架构异同
 
 **阅读建议**：
 - 先看 World Model 部分（不看 RL 部分）
