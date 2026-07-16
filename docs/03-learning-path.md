@@ -55,9 +55,11 @@ probs = logits.softmax(dim=1)
 
 使用 LLaVA 或类似模型，输入图像+问题，观察输出：
 
-```bash
-# 使用 transformers 加载 LLaVA
-python tutorials/01-vlm-basics/run_vlm_demo.py
+```python
+# 示例代码见 tutorials/01-vlm-basics/README.md
+from transformers import AutoProcessor, LlavaForConditionalGeneration
+model = LlavaForConditionalGeneration.from_pretrained("llava-hf/llava-1.5-7b-hf")
+processor = AutoProcessor.from_pretrained("llava-hf/llava-1.5-7b-hf")
 ```
 
 **验证标准**：能解释 CLIP 的 contrastive loss 公式，并能计算给定图像-文本对的相似度分数。

@@ -444,13 +444,13 @@ World Action Model: p(o_{t+1}, a_{t+1} | o_t, a_t)  → 同时预测状态和动
 - 关注 Figure 1 的 RSSM 结构图
 - 理解 `reconstruction loss` + `reward loss` + `continue loss` 的训练目标
 
-### 第二步：跑 simple_world_model.py
+### 第二步：理解世界模型的核心组件
 
-在 VLA 项目 examples 目录下有简单的世界模型实现：
+在 VLA 项目 docs/06 中有完整的世界模型理论介绍：
 
 ```bash
-# VLA-Zero-to-Hero/examples/
-python simple_world_model.py --env PandaReach --epochs 50
+# 阅读世界模型文档
+# 实际代码实现请参考 docs/07-world-models-for-vla.md 中引用的开源项目
 ```
 
 这个脚本实现了一个最简版的世界模型：

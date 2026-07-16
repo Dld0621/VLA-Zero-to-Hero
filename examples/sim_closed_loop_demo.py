@@ -73,9 +73,10 @@ GRIPPER_FORCE = 50.0
 
 def create_table_collision_shape(client_id: int) -> int:
     """创建桌子的碰撞形状（使用纯几何体，无需外部 URDF）。"""
-    col_shape = client_id.createCollisionShape(
+    col_shape = p.createCollisionShape(
         p.GEOM_BOX,
         halfExtents=[TABLE_SIZE / 2, TABLE_SIZE / 2, TABLE_HEIGHT / 2],
+        physicsClientId=client_id,
     )
     return col_shape
 
@@ -83,16 +84,18 @@ def create_table_collision_shape(client_id: int) -> int:
 def create_table(client_id: int) -> int:
     """在场景中生成桌子。"""
     col_shape = create_table_collision_shape(client_id)
-    visual_shape = client_id.createVisualShape(
+    visual_shape = p.createVisualShape(
         p.GEOM_BOX,
         halfExtents=[TABLE_SIZE / 2, TABLE_SIZE / 2, TABLE_HEIGHT / 2],
         rgbaColor=[0.6, 0.4, 0.2, 1.0],
+        physicsClientId=client_id,
     )
-    table_id = client_id.createMultiBody(
+    table_id = p.createMultiBody(
         baseMass=0,  # static
         baseCollisionShapeIndex=col_shape,
         baseVisualShapeIndex=visual_shape,
         basePosition=[0, 0, TABLE_HEIGHT / 2],
+        physicsClientId=client_id,
     )
     return table_id
 
@@ -105,20 +108,23 @@ def create_cube(client_id: int, position: Optional[List[float]] = None) -> int:
         y = np.random.uniform(-0.15, 0.15)
         position = [x, y, TABLE_HEIGHT + CUBE_SIZE / 2]
 
-    col_shape = client_id.createCollisionShape(
+    col_shape = p.createCollisionShape(
         p.GEOM_BOX,
         halfExtents=[CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2],
+        physicsClientId=client_id,
     )
-    visual_shape = client_id.createVisualShape(
+    visual_shape = p.createVisualShape(
         p.GEOM_BOX,
         halfExtents=[CUBE_SIZE / 2, CUBE_SIZE / 2, CUBE_SIZE / 2],
         rgbaColor=CUBE_COLOR,
+        physicsClientId=client_id,
     )
-    cube_id = client_id.createMultiBody(
+    cube_id = p.createMultiBody(
         baseMass=0.01,
         baseCollisionShapeIndex=col_shape,
         baseVisualShapeIndex=visual_shape,
         basePosition=position,
+        physicsClientId=client_id,
     )
     return cube_id
 
@@ -131,15 +137,16 @@ def create_simple_gripper_marker(client_id: int, position: Optional[List[float]]
     if position is None:
         position = [0.0, 0.0, TABLE_HEIGHT + 0.15]
 
-    col_shape = client_id.createCollisionShape(p.GEOM_SPHERE, radius=0.015)
-    visual_shape = client_id.createVisualShape(
-        p.GEOM_SPHERE, radius=0.015, rgbaColor=[0.2, 0.6, 0.9, 1.0]
+    col_shape = p.createCollisionShape(p.GEOM_SPHERE, radius=0.015, physicsClientId=client_id)
+    visual_shape = p.createVisualShape(
+        p.GEOM_SPHERE, radius=0.015, rgbaColor=[0.2, 0.6, 0.9, 1.0], physicsClientId=client_id
     )
-    marker_id = client_id.createMultiBody(
+    marker_id = p.createMultiBody(
         baseMass=0.0,  # kinematic
         baseCollisionShapeIndex=col_shape,
         baseVisualShapeIndex=visual_shape,
         basePosition=position,
+        physicsClientId=client_id,
     )
     return marker_id
 
@@ -302,7 +309,7 @@ class ScriptedPolicy:
     def _get_gripper_pos(self) -> np.ndarray:
         """获取当前夹爪位置（这里使用第一个 link 的状态）。"""
         # 简化：使用 marker 的位置
-        pos, _ = p.getBasePositionAndOrientation(0, physicsClientId=self.client_id)
+        pos, _ = p.getBasePositionAndOrientation(self.gripper_id, physicsClientId=self.client_id)
         return np.array(pos)
 
     def get_action(self, image: np.ndarray, instruction: str = "") -> np.ndarray:

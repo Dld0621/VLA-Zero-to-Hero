@@ -153,7 +153,7 @@ python tutorials/03-simple-vla/build_vla_from_scratch.py --num_epochs 50
 
 # Stage 4: 需要 A100
 python tutorials/04-fine-tuning/finetune_libero.py \
-    --vla_path openvla/openvla-7b --task_suite libero_spatial --batch_size 4 --lora_rank 32
+    --vla_path openvla/openvla-7b --benchmark libero_spatial --batch_size 4 --lora_rank 32
 
 # 仿真闭环
 python examples/sim_closed_loop_demo.py --mode scripted

@@ -80,7 +80,7 @@
 
 | 资源 | 类型 | 链接 |
 |------|------|------|
-| Stanford CS25 | VLM 研讨课 | [YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rM6 GirPQv-_4) |
+| Stanford CS25 | VLM 研讨课 | [YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rM6GirPQv-_4) |
 | Berkeley Deep RL | 强化学习基础 | [Site](http://rail.eecs.berkeley.edu/deeprlcourse/) |
 | Embodied AI Workshop | 年度研讨会 | [Site](https://embodied-ai.org/) |
 | OpenVLA Docs | 官方文档 | [Site](https://openvla.github.io/) |

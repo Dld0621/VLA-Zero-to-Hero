@@ -19,6 +19,8 @@ dependencies:
   - tqdm
   - pip:
     - transformers>=4.40.0
+    - peft>=0.4.0
+    - bitsandbytes>=0.41.0
     - accelerate
     - datasets
     - einops
