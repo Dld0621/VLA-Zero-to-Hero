@@ -637,9 +637,14 @@ PointWorld → DreamDojo → RISE
 
 | 资源 | 类型 | 难度 | 说明 |
 |------|------|------|------|
-| Dreamer V3 论文 | 论文 | 中等 | 世界模型入门首选 |
-| Danijar Hafner 的博客 | 博客 | 入门 | Dreamer 系列的第一作者，写作清晰 |
-| DIAMOND 论文 | 论文 | 中等 | 理解 Diffusion World Model |
-| V-JEPA 2 论文 | 论文 | 中等 | 理解非生成式世界模型 |
-| Model-Based RL 综述 (Moerland et al., 2023) | 综述 | 入门 | 系统梳理世界模型方法 |
-| Spinning Up — MBRL 章节 | 教程 | 入门 | OpenAI 的 model-based RL 教程 |
+| [Dreamer V3 论文](https://arxiv.org/abs/2301.04104) | 论文 | 中等 | 世界模型入门首选，RSSM 架构详解 |
+| [Danijar Hafner 博客](https://danijar.com/blog/) | 博客 | 入门 | Dreamer 系列第一作者，RSSM 深度解读 |
+| [DIAMOND 论文](https://arxiv.org/abs/2405.12399) | 论文 | 中等 | Diffusion 世界模型的代表性工作 |
+| [V-JEPA 2 论文](https://arxiv.org/abs/2502.05055) | 论文 | 中等 | 非生成式世界模型，Meta AI |
+| [Model-Based RL 综述 (Moerland et al., 2023)](https://arxiv.org/abs/2006.16712) | 综述 | 入门 | 世界模型方法系统分类与对比 |
+| [Spinning Up — MBRL](https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html) | 教程 | 入门 | OpenAI 的 model-based RL 入门 |
+| [Yannic Kilcher — Dreamer/DIAMOND](https://www.youtube.com/c/YannicKilcher) | 视频 | 中等 | 论文精讲频道，Dreamer V3 / DIAMOND 均有覆盖 |
+| [NeurIPS 2020 MBRL Tutorial](https://sites.google.com/view/mbrl-tutorial) | 教程 | 进阶 | NeurIPS 官方 model-based RL 教程 |
+| [Lilian Weng — World Models](https://lilianweng.github.io/posts/2023-06-23-llm-agent/) | 博客 | 中等 | 世界模型与模型预测控制的系统梳理 |
+| [DIAMOND 官方实现](https://github.com/ethz-rl/diamond) | 代码 | 中等 | Diffusion 世界模型参考实现 |
+| [IRIS 官方实现](https://github.com/janner/iris) | 代码 | 中等 | Transformer 世界模型，代码结构清晰 |

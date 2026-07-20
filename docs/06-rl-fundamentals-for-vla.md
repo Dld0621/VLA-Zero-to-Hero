@@ -323,8 +323,13 @@ for iteration in range(num_iterations):
 
 | 资源 | 类型 | 难度 | 说明 |
 |------|------|------|------|
-| Sutton & Barto 《Reinforcement Learning》 | 教材 | 入门 | RL 圣经，选读前 6 章即可 |
-| Spinning Up in Deep RL (OpenAI) | 教程 | 入门 | 代码驱动的 RL 教程 |
+| [Sutton & Barto 《Reinforcement Learning》](http://incompleteideas.net/book/RLbook2020.pdf) | 教材 | 入门 | RL 圣经，选读前 6 章即可 |
+| [Spinning Up in Deep RL (OpenAI)](https://spinningup.openai.com/en/latest/) | 教程 | 入门 | 代码驱动的 RL 教程，PPO/SAC/TRPO 完整实现 |
+| [Stable Baselines3 文档](https://stable-baselines3.readthedocs.io/) | 文档 | 中等 | PyTorch RL 算法库，含完整 API 和示例 |
+| [David Silver RL Course (DeepMind)](https://www.youtube.com/playlist?list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-) | 视频 | 入门 | 经典 RL 课程（16 讲），理论扎实 |
+| [UCB CS285 — Deep RL (Sergey Levine)](https://rail.eecs.berkeley.edu/deeprlcourse/) | 课程 | 进阶 | Berkeley 深度强化学习，含前沿进展 |
+| [Hugging Face RL Course](https://huggingface.co/learn/deep-rl-course/unit0/introduction) | 教程 | 入门 | 从 Q-Learning 到 PPO 的交互式课程 |
+| [The 37 Implementation Details of PPO](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/) | 博客 | 进阶 | PPO 调参与实现细节，复现必读 |
 | PPO 原始论文 (Schulman et al., 2017) | 论文 | 中等 | 理解 PPO 的设计动机 |
 | OpenVLA 论文 (2024) | 论文 | 中等 | VLA + BC 训练的实践参考 |
 | RT-2 论文 (2023) | 论文 | 中等 | VLA 模型在机器人上的应用 |

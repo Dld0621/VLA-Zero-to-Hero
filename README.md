@@ -244,6 +244,45 @@ python examples/sim_closed_loop_demo.py --mode scripted
 
 - [Embodied-AI-Paper-Analysis](https://github.com/Dld0621/Embodied-AI-Paper-Analysis) — 具身智能论文体系化梳理（VLA / RL / World Model 等 7 大方向，按顶会分类，带 venue tier 标注）
 
+---
+
+## 外部学习资源
+
+> 除本项目文档外，以下外部资源按 VLA / RL / 世界模型三支柱分类，帮助你系统学习。
+
+### VLA（Vision-Language-Action）
+
+| 资源 | 类型 | 难度 | 说明 |
+|------|------|------|------|
+| [OpenVLA 官方文档](https://github.com/openvla/openvla) | 文档 | 中等 | 开源 VLA 的推理、微调、部署全指南 |
+| [Hugging Face VLA 博客](https://huggingface.co/blog/vlms) | 博客 | 入门 | 从 VLM 到 VLA 的演进与核心概念 |
+| [Lilian Weng — VLA & Robot Learning](https://lilianweng.github.io/posts/2023-06-23-llm-agent/) | 博客 | 中等 | 深度学习研究者的具身智能综述 |
+| [Stanford CS224R](https://cs224r.stanford.edu/) | 课程 | 进阶 | Stanford 机器人学习课程（含 VLA 前沿） |
+| [Diffusion Policy 官方教程](https://diffusion-policy.cs.columbia.edu/) | 教程 | 中等 | 扩散策略从原理到代码的完整教程 |
+| [Open X-Embodiment 数据集文档](https://robotics-transformer-x.github.io/) | 文档 | 入门 | 最大的开源机器人操作数据集 |
+
+### 强化学习（RL）
+
+| 资源 | 类型 | 难度 | 说明 |
+|------|------|------|------|
+| [OpenAI Spinning Up](https://spinningup.openai.com/en/latest/) | 教程 | 入门 | RL 最经典的入门教程（PPO/SAC/TRPO） |
+| [Stable Baselines3 文档](https://stable-baselines3.readthedocs.io/) | 文档 | 中等 | PyTorch RL 算法库，含完整 API 和示例 |
+| [David Silver RL Course](https://www.youtube.com/playlist?list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-) | 视频 | 入门 | DeepMind 经典 RL 课程（16 讲） |
+| [UCB CS285 — Deep RL](https://rail.eecs.berkeley.edu/deeprlcourse/) | 课程 | 进阶 | Berkeley 深度强化学习（Sergey Levine） |
+| [Hugging Face RL Course](https://huggingface.co/learn/deep-rl-course/unit0/introduction) | 教程 | 入门 | 从 Q-Learning 到 PPO 的交互式课程 |
+| [The 37 Implementation Details of PPO](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/) | 博客 | 进阶 | PPO 调参与实现细节，复现必读 |
+
+### 世界模型（World Models）
+
+| 资源 | 类型 | 难度 | 说明 |
+|------|------|------|------|
+| [Danijar Hafner 博客](https://danijar.com/blog/) | 博客 | 中等 | Dreamer 系列第一作者，RSSM 架构深度解读 |
+| [Lilian Weng — World Models](https://lilianweng.github.io/posts/2023-06-23-llm-agent/) | 博客 | 中等 | 世界模型与模型预测控制的系统梳理 |
+| [Yannic Kilcher — Dreamer/DIAMOND](https://www.youtube.com/c/YannicKilcher) | 视频 | 中等 | 论文精讲频道（Dreamer V3、DIAMOND 等） |
+| [World Models 综述 (Moerland et al., 2023)](https://arxiv.org/abs/2006.16712) | 论文 | 入门 | 世界模型方法系统分类与对比 |
+| [Model-Based RL Tutorial (NeurIPS 2020)](https://sites.google.com/view/mbrl-tutorial) | 教程 | 进阶 | NeurIPS 官方 model-based RL 教程 |
+| [DIAMOND 官方实现](https://github.com/ethz-rl/diamond) | 代码 | 中等 | Diffusion 世界模型的参考实现 |
+
 ## Acknowledgments
 
 - [OpenVLA](https://github.com/openvla/openvla) — 开源 VLA 模型与微调脚本
