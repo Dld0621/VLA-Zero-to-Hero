@@ -1,6 +1,6 @@
 # 关键论文导读
 
-> 10 篇必读 VLA 论文，从奠基之作到最新开源模型，每篇附"为什么读"和"核心收获"。
+> 10 篇必读 VLA 论文 + 1 篇世界模型补充，从奠基之作到最新开源模型，每篇附"为什么读"和"核心收获"。
 
 > 📚 **想查看更完整的具身智能论文分类与整理？** 欢迎访问 [Embodied-AI-Paper-Analysis](https://github.com/Dld0621/Embodied-AI-Paper-Analysis) — 覆盖 VLA、强化学习、世界模型等 7 大方向的论文体系化梳理，按顶会分类、带 venue tier 标注。
 
@@ -259,6 +259,35 @@ loss = cross_entropy(logits, labels) + cross_entropy(logits.T, labels)
 
 ---
 
+## 世界模型补充（VLA 融合方向）
+
+> 随着项目从纯 VLA 扩展为"VLA + RL + 世界模型"三大支柱，以下补充论文聚焦世界模型如何直接服务于机器人操作与 VLA 系统。
+
+### 11. LaDi-WM: Latent Diffusion World Model for Predictive Manipulation
+
+- **论文**: *LaDi-WM: A Latent Diffusion-based World Model for Predictive Manipulation* (国防科大 / 北京大学 / 深圳大学, CoRL 2025)
+- **arXiv**: [2505.11528](https://arxiv.org/abs/2505.11528)
+- **项目页**: [LaDi-WM Project](https://guhuangai.github.io/LaDiWM.github.io/)
+
+**为什么读**：世界模型与 VLA 融合的最新代表作。首次将 Latent Diffusion 引入机器人操作，在隐空间建模动力学，实现"世界模型预测 → 迭代优化策略"的闭环。
+
+**核心架构**：
+- **双塔隐空间**：DINOv2（几何）+ SigLIP（语义）构建通用隐表示
+- **交互扩散**：几何与语义表征在扩散过程中交互，学习联合动力学
+- **迭代策略优化**：用 WM 未来预测多次引导策略，逐步降低动作熵
+
+**核心收获**：
+- 隐空间扩散比像素级预测更适合机器人操作（计算高效 + 跨场景泛化强）
+- 世界模型泛化能力优于策略模型：跨数据集（LIBERO → CALVIN）零样本迁移提升显著
+- 少量轨迹（10 条）即可达到 68.7% 成功率，对真实机器人数据稀缺场景极具价值
+
+**VLA 关联**：
+- LaDi-WM 的隐空间设计（DINOv2 + SigLIP）与 OpenVLA 视觉编码器一致，可直接作为 VLA 的"预测模块"
+- 对应融合方式：世界模型作为规划器（本文档 docs/07 第 4.3 节）
+- 完整解读见 [`docs/07-world-models-for-vla.md`](./07-world-models-for-vla.md#57-ladi-wm-cori-2025)
+
+---
+
 ## 阅读路线图
 
 ```
@@ -289,3 +318,4 @@ OpenVLA 源码精读 → Octo 架构设计 → π0 Flow Matching
 | Octo | [2405.12213](https://arxiv.org/abs/2405.12213) | [GitHub](https://github.com/octo-models/octo) | ★★★ |
 | OpenVLA | [2406.09246](https://arxiv.org/abs/2406.09246) | [GitHub](https://github.com/openvla/openvla) | ★★★ |
 | π0 | [2410.24164](https://arxiv.org/abs/2410.24164) | [GitHub](https://github.com/physical-intelligence/pi0) | ★★★★ |
+| LaDi-WM | [2505.11528](https://arxiv.org/abs/2505.11528) | [Project](https://guhuangai.github.io/LaDiWM.github.io/) | ★★★★ |

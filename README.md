@@ -79,7 +79,7 @@
 | | VLA + RL | RLVF, BC+RL 两阶段, Hierarchical RL | `docs/06-rl-fundamentals-for-vla.md` |
 | **World Model** | Latent Dynamics | Dreamer V1/V2/V3, RSSM | `docs/07-world-models-for-vla.md` |
 | | 隐式动力学 | MuZero, EfficientZero | `docs/07-world-models-for-vla.md` |
-| | Transformer/Diffusion | IRIS, DIAMOND, STORM | `docs/07-world-models-for-vla.md` |
+| | Transformer/Diffusion | IRIS, DIAMOND, LaDi-WM | `docs/07-world-models-for-vla.md` |
 | | 非生成式 | V-JEPA, V-JEPA 2 | `docs/07-world-models-for-vla.md` |
 | | Foundation WM | Genie, UniSim, Cosmos | `docs/07-world-models-for-vla.md` |
 | | WM + VLA 融合 | 数据生成, 评估, 规划, WAM | `docs/07-world-models-for-vla.md` |
@@ -204,6 +204,7 @@ python examples/sim_closed_loop_demo.py --mode scripted
 | Octo-Base | 模型 | 27M 参数，CPU 可运行 |
 | Dreamer V3 | 模型 | 基于世界模型的 RL |
 | DIAMOND | 模型 | Diffusion 做世界模型 |
+| LaDi-WM | 模型 | 隐空间扩散世界模型（CoRL 2025，迭代优化策略） |
 
 更多资源见 [`resources/README.md`](resources/README.md)。
 

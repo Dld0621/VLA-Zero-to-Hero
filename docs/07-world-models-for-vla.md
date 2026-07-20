@@ -416,6 +416,32 @@ World Action Model: p(o_{t+1}, a_{t+1} | o_t, a_t)  → 同时预测状态和动
 - **VLA 关联**：直接展示了世界模型和 VLA 融合的新方向
 - **阅读建议**：理解 WAM 与传统 world model + policy 分离架构的区别
 
+### 5.7 LaDi-WM (CoRL 2025)
+
+- **全称**：LaDi-WM: A Latent Diffusion-based World Model for Predictive Manipulation
+- **作者**：国防科大 / 北京大学 / 深圳大学
+- **arXiv**: [2505.11528](https://arxiv.org/abs/2505.11528)
+- **项目页**: [https://guhuangai.github.io/LaDiWM.github.io/](https://guhuangai.github.io/LaDiWM.github.io/)
+
+**核心贡献**：首次将 **Latent Diffusion** 引入机器人世界模型，在隐空间而非像素空间建模动力学，显著提升操作任务的样本效率与跨场景泛化。
+
+**关键技术**：
+- **双塔隐空间表示**：DINOv2 提取几何特征 + SigLIP 提取语义特征，构建通用隐空间
+- **交互扩散（Interactive Diffusion）**：在扩散过程中让几何与语义表征充分交互，学习二者依赖关系
+- **迭代策略优化**：推理时利用世界模型的未来预测多次引导策略输出，逐步降低动作分布熵
+
+**实验亮点**：
+- LIBERO-LONG 仅用 **10 条轨迹** 训练即达 **68.7%** 成功率，超越之前所有方法
+- 跨场景泛化：在 LIBERO 上训练的世界模型直接引导 CALVIN 策略学习，性能提升 0.61
+- 真实场景（叠碗、开抽屉、抓取放入篮子）将模仿学习策略成功率提升 **20%**
+
+**VLA 关联**：
+- LaDi-WM 与 VLA 的融合方式对应本文档第 4.3 节"世界模型作为规划器"——用 WM 的未来预测迭代优化策略
+- 其隐空间设计（DINOv2 + SigLIP）与 OpenVLA 的视觉编码器选择一致，天然兼容 VLA 感知模块
+- 证明了"世界模型泛化能力优于策略模型"，为 VLA 的数据生成与 sim-to-real 提供新思路
+
+**阅读建议**：重点理解为什么隐空间扩散比像素级预测更适合机器人操作，以及交互扩散如何让几何与语义协同建模动力学。
+
 ### 论文阅读优先级
 
 | 优先级 | 论文 | 理由 |
@@ -423,6 +449,7 @@ World Action Model: p(o_{t+1}, a_{t+1} | o_t, a_t)  → 同时预测状态和动
 | **P0** | Dreamer V3 | 理解世界模型的基础架构 RSSM |
 | **P1** | DIAMOND | 理解 Diffusion 作为世界模型 |
 | **P1** | V-JEPA 2 | 理解非生成式世界模型的思路 |
+| **P1** | LaDi-WM | 理解隐空间扩散世界模型 + 与 VLA 的最新融合方式 |
 | **P2** | UniSim | 理解基础世界模型的思路 |
 | **P2** | IRIS | 理解 Transformer 世界模型 |
 | **P3** | DreamZero | 理解 WAM 范式（最新进展） |
