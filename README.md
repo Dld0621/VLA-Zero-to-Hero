@@ -215,6 +215,9 @@ python examples/sim_closed_loop_demo.py --mode scripted
 | Dreamer V3 | 模型 | 基于世界模型的 RL |
 | DIAMOND | 模型 | Diffusion 做世界模型 |
 | LaDi-WM | 模型 | 隐空间扩散世界模型（CoRL 2025，迭代优化策略） |
+| DreamDojo | 模型 | 通用机器人世界模型（ICML 2026，4.4 万小时人类视频预训练） |
+| PointWorld | 模型 | 3D 跨本体世界模型（CVPR 2026 Highlight，Point Flow） |
+| RISE | 模型 | 组合式世界模型 + RL 策略自提升（RSS 2026） |
 
 更多资源见 [`resources/README.md`](resources/README.md)。
 
@@ -250,3 +253,6 @@ python examples/sim_closed_loop_demo.py --mode scripted
 - [Dreamer V3](https://github.com/danijar/dreamerv3) — 基于世界模型的 RL
 - [DIAMOND](https://github.com/ethz-rl/diamond) — Diffusion 世界模型
 - [V-JEPA 2](https://github.com/facebookresearch/v-jepa2) — 非生成式世界模型
+- [DreamDojo](https://github.com/NVIDIA/DreamDojo) — 通用机器人世界模型（ICML 2026）
+- [PointWorld](https://github.com/NVlabs/PointWorld) — 3D 跨本体世界模型（CVPR 2026）
+- [RISE](https://github.com/OpenDriveLab/RISE) — 组合式世界模型 + RL（RSS 2026）

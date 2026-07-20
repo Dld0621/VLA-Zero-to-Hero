@@ -286,6 +286,76 @@ loss = cross_entropy(logits, labels) + cross_entropy(logits.T, labels)
 - 对应融合方式：世界模型作为规划器（本文档 docs/07 第 4.3 节）
 - 完整解读见 [`docs/07-world-models-for-vla.md`](./07-world-models-for-vla.md#57-ladi-wm-cori-2025)
 
+### 12. DreamDojo: Generalist Robot World Model from Large-Scale Human Videos
+
+- **论文**: *DreamDojo: A Generalist Robot World Model from Large-Scale Human Videos* (UT Austin / NVIDIA, ICML 2026)
+- **arXiv**: [2602.06949](https://arxiv.org/abs/2602.06949)
+- **代码**: [NVIDIA/DreamDojo](https://github.com/NVIDIA/DreamDojo) (Apache-2.0)
+
+**为什么读**：从海量人类视频预训练通用机器人世界模型的代表性工作，引入 latent action 解决无动作标签数据训练问题。
+
+**核心架构**：
+- **Latent Action Model**：隐式编码人类视频中的动作信息
+- **蒸馏加速**：约 10 FPS 实时交互
+- **Post-training**：少量机器人数据即可迁移
+
+**核心收获**：
+- 世界模型可以从人类视频规模化预训练，无需昂贵的机器人演示数据
+- latent action 是跨 embodiment 动作表示的重要思路
+- 蒸馏方案在生成质量和推理速度间取得平衡
+
+**VLA 关联**：
+- 直接对应 VLA 的数据瓶颈问题
+- 与你当前研究的"人类数据→机器人控制"方向高度契合
+- 完整解读见 [`docs/07-world-models-for-vla.md`](./07-world-models-for-vla.md#58-dreamdojo-icml-2026)
+
+### 13. RISE: Self-Improving Robot Policy with Compositional World Model
+
+- **论文**: *RISE: Self-Improving Robot Policy with Compositional World Model* (OpenDriveLab, RSS 2026)
+- **arXiv**: [2602.11075](https://arxiv.org/abs/2602.11075)
+- **代码**: [OpenDriveLab/RISE](https://github.com/OpenDriveLab/RISE)
+
+**为什么读**：世界模型如何真正帮助机器人策略变强的工程化实现，提供完整的 WM + RL 闭环代码。
+
+**核心架构**：
+- **Dynamics Model**：可控环境动力学
+- **Progress/Value Model**：评估任务进度
+- **Imagination RL**：在想象世界中训练策略
+- **PiPER 部署**：想象训练 → 真实机器人
+
+**核心收获**：
+- 组合式世界模型分离 dynamics 和 value，训练更稳定
+- imagination rollout 可以替代真实环境的 RL 交互，大幅降低硬件成本
+- 完整代码链路（offline policy → online RL → real robot）值得复现
+
+**VLA 关联**：
+- 对应"高质量重定向数据 → 世界模型 → RL 自提升"的完整路线
+- 与你当前的重定向项目可以自然延伸结合
+- 完整解读见 [`docs/07-world-models-for-vla.md`](./07-world-models-for-vla.md#59-rise-rss-2026)
+
+### 14. PointWorld: Scaling 3D World Models for In-The-Wild Robotic Manipulation
+
+- **论文**: *PointWorld: Scaling 3D World Models for In-The-Wild Robotic Manipulation* (NVIDIA / Stanford, CVPR 2026 Highlight)
+- **arXiv**: [2601.03782](https://arxiv.org/abs/2601.03782)
+- **代码**: [NVlabs/PointWorld](https://github.com/NVlabs/PointWorld)
+
+**为什么读**：3D 跨本体世界模型的开创性工作，与你当前跨形态重定向研究直接相关。
+
+**核心架构**：
+- **3D Point Flow**：统一表示 world state + action
+- **跨 embodiment**：不依赖特定机器人的关节空间
+- **MPC 实时规划**：0.1 秒推理速度
+
+**核心收获**：
+- 3D point flow 比 RGB 视频更适合跨本体世界模型
+- 减少对特定 action representation 的依赖
+- 200 万条轨迹的大规模训练验证了 3D 世界模型的可扩展性
+
+**VLA 关联**：
+- 与你研究的"人手 21 点 → 灵巧手关节"重定向思路形成互补
+- 未来可结合：3D point flow 作为中间表示 → retargeting 到具体机器人动作
+- 完整解读见 [`docs/07-world-models-for-vla.md`](./07-world-models-for-vla.md#510-pointworld-cvpr-2026-highlight)
+
 ---
 
 ## 阅读路线图
@@ -319,3 +389,6 @@ OpenVLA 源码精读 → Octo 架构设计 → π0 Flow Matching
 | OpenVLA | [2406.09246](https://arxiv.org/abs/2406.09246) | [GitHub](https://github.com/openvla/openvla) | ★★★ |
 | π0 | [2410.24164](https://arxiv.org/abs/2410.24164) | [GitHub](https://github.com/physical-intelligence/pi0) | ★★★★ |
 | LaDi-WM | [2505.11528](https://arxiv.org/abs/2505.11528) | [Project](https://guhuangai.github.io/LaDiWM.github.io/) | ★★★★ |
+| DreamDojo | [2602.06949](https://arxiv.org/abs/2602.06949) | [GitHub](https://github.com/NVIDIA/DreamDojo) | ★★★★ |
+| RISE | [2602.11075](https://arxiv.org/abs/2602.11075) | [GitHub](https://github.com/OpenDriveLab/RISE) | ★★★★ |
+| PointWorld | [2601.03782](https://arxiv.org/abs/2601.03782) | [GitHub](https://github.com/NVlabs/PointWorld) | ★★★★ |

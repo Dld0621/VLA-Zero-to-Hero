@@ -228,5 +228,8 @@ loss = KL(posterior || prior) + reconstruction(z, obs) + reward_loss(z)
 - Dreamer V3 论文（P0，RSSM 基础）
 - DIAMOND 论文（P1，Diffusion 世界模型）
 - LaDi-WM 论文（P1，隐空间扩散 + 迭代策略优化）
+- **PointWorld** 论文（P1，3D 跨本体世界模型，与你重定向研究直接相关）
+- **DreamDojo** 论文（P1，人类视频预训练 Foundation WM 规模化）
+- **RISE** 论文（P1，WM + RL 完整闭环工程化）
 - V-JEPA 2 论文（P1，非生成式世界模型）
-- 完整论文导读见 [`docs/07-world-models-for-vla.md`](../../docs/07-world-models-for-vla.md#5-关键论文导读7-篇)
+- 完整论文导读见 [`docs/07-world-models-for-vla.md`](../../docs/07-world-models-for-vla.md#5-关键论文导读10-篇)

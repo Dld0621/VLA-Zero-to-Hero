@@ -442,6 +442,96 @@ World Action Model: p(o_{t+1}, a_{t+1} | o_t, a_t)  → 同时预测状态和动
 
 **阅读建议**：重点理解为什么隐空间扩散比像素级预测更适合机器人操作，以及交互扩散如何让几何与语义协同建模动力学。
 
+### 5.8 DreamDojo (ICML 2026)
+
+- **全称**：DreamDojo: A Generalist Robot World Model from Large-Scale Human Videos
+- **作者**：UT Austin, NVIDIA
+- **会议**：ICML 2026
+- **arXiv**: [2602.06949](https://arxiv.org/abs/2602.06949)
+- **项目页**: [https://dreamdojo-world.github.io/](https://dreamdojo-world.github.io/)
+- **代码**: [NVIDIA/DreamDojo](https://github.com/NVIDIA/DreamDojo) (Apache-2.0)
+
+**核心贡献**：首个从 **4.4 万小时第一视角人类视频** 预训练的通用机器人世界模型，引入 latent action 将无动作标签的人类视频转化为可学习世界动力学的资源。
+
+**关键技术**：
+- **Latent Action Model**：将人类视频动作隐式编码为 latent action，无需显式机器人动作标签即可训练
+- **蒸馏加速**：将生成速度提升到约 **10 FPS**，支持实时交互
+- **Post-training**：预训练后仅需少量机器人数据微调即可用于策略评估和基于模型的规划
+
+**实验亮点**：
+- 在机器人数据 post-training 后，可用于实时交互、policy evaluation 和 model-based planning
+- 提供 pretrained / post-trained checkpoints，复现完整度极高
+
+**VLA 关联**：
+- 直接对应 VLA 的数据瓶颈问题：如何将海量人类视频（而非昂贵的机器人演示）用于世界模型训练
+- 与你当前研究的 **人类数据→机器人控制** 方向高度契合
+- latent action 的概念为跨 embodiment 动作表示提供了新思路
+
+**阅读建议**：重点理解 latent action 如何让无动作标签的人类视频也能训练世界模型，以及蒸馏方案如何兼顾生成质量和推理速度。
+
+### 5.9 RISE (RSS 2026)
+
+- **全称**：RISE: Self-Improving Robot Policy with Compositional World Model
+- **作者**：OpenDriveLab
+- **会议**：RSS 2026
+- **arXiv**: [2602.11075](https://arxiv.org/abs/2602.11075)
+- **项目页**: [https://opendrivelab.com/RISE/](https://opendrivelab.com/RISE/)
+- **代码**: [OpenDriveLab/RISE](https://github.com/OpenDriveLab/RISE)
+
+**核心贡献**：将世界模型拆分为 **可控 dynamics model** 和 **progress/value model**，让机器人策略在 imagination rollout 中进行强化学习，减少真机 RL 的硬件磨损和安全成本。
+
+**关键技术**：
+- **组合式世界模型**：Dynamics Model + Progress/Value Model 分离设计
+- **Imagination RL**：在想象世界中训练策略，避免真实环境交互
+- **PiPER 部署**：支持从想象训练到真实机器人部署的完整 pipeline
+
+**实验亮点**：
+- 在动态砖块分类、背包整理、关箱等真实操作任务上取得明显提升
+- 提供完整的 offline policy → value model → online RL → real robot 代码链路
+
+**VLA 关联**：
+- 对应融合方式 4.2（评估器）和 4.3（规划器）的工程化实现
+- 展示了从"高质量重定向数据 → 世界模型 → 想象 rollout → 策略自提升"的完整闭环
+- 与你当前的重定向项目可以自然延伸结合
+
+**阅读建议**：重点理解组合式世界模型的设计动机，以及 imagination rollout 如何替代真实环境的 RL 交互。
+
+### 5.10 PointWorld (CVPR 2026 Highlight)
+
+- **全称**：PointWorld: Scaling 3D World Models for In-The-Wild Robotic Manipulation
+- **作者**：NVIDIA / Stanford
+- **会议**：CVPR 2026 Highlight
+- **arXiv**: [2601.03782](https://arxiv.org/abs/2601.03782)
+- **项目页**: [https://point-world.github.io/](https://point-world.github.io/)
+- **代码**: [NVlabs/PointWorld](https://github.com/NVlabs/PointWorld)
+
+**核心贡献**：首次提出 **3D Point Flow** 作为跨 embodiment 的统一世界表示，用 3D 点流而非 RGB 视频预测动力学，天然适合不同形态机器人的通用操作。
+
+**关键技术**：
+- **3D Point Flow 表示**：统一表示 world state + robot action，不依赖特定机器人的关节空间
+- **跨 embodiment 设计**：输入 RGB-D + 动作 → 预测场景未来 3D 点流变化
+- **MPC 实时规划**：推理速度约 **0.1 秒**，可直接用于模型预测控制
+
+**实验亮点**：
+- 约 **200 万条轨迹、500 小时数据** 训练
+- 在真实机器人操作任务上验证，支持 DROID 和 BEHAVIOR 数据集
+- 提供完整的 training / evaluation pipeline 和 pretrained checkpoints
+
+**VLA 关联**：
+- 与你研究的 **跨形态重定向**（morphology-aware actuator-centric retargeting）高度相关
+- PointWorld 的"embodiment-agnostic 3D representation"与你的"人手 21 点 → 灵巧手关节"重定向思路形成互补
+- 两条路线未来可以结合：3D point flow 作为中间表示 → retargeting 到具体机器人动作
+
+**阅读建议**：重点理解为什么 3D point flow 比 RGB 视频更适合跨本体世界模型，以及它如何减少对特定机器人 action representation 的依赖。
+
+### 三篇论文核心差异对比
+
+| 论文 | 核心世界表示 | 主要解决问题 | 最适合研究 |
+|------|-------------|-------------|----------|
+| **DreamDojo** | 视频 / latent action | 从海量人类视频学习通用世界动力学 | Foundation World Model 预训练规模化 |
+| **RISE** | Dynamics + Value Model | 在想象世界里提升机器人策略 | World Model + RL 策略自提升 |
+| **PointWorld** | 3D Point Flow | 跨本体 3D 动力学预测与规划 | 3D World Model / Embodiment Generalization |
+
 ### 论文阅读优先级
 
 | 优先级 | 论文 | 理由 |
@@ -450,9 +540,20 @@ World Action Model: p(o_{t+1}, a_{t+1} | o_t, a_t)  → 同时预测状态和动
 | **P1** | DIAMOND | 理解 Diffusion 作为世界模型 |
 | **P1** | V-JEPA 2 | 理解非生成式世界模型的思路 |
 | **P1** | LaDi-WM | 理解隐空间扩散世界模型 + 与 VLA 的最新融合方式 |
+| **P1** | PointWorld | 理解 3D 跨本体世界模型，与你重定向研究直接相关 |
+| **P1** | DreamDojo | 理解从人类视频预训练 Foundation WM 的规模化路径 |
+| **P1** | RISE | 理解 WM + RL 的完整闭环工程化实现 |
 | **P2** | UniSim | 理解基础世界模型的思路 |
 | **P2** | IRIS | 理解 Transformer 世界模型 |
 | **P3** | DreamZero | 理解 WAM 范式（最新进展） |
+
+**推荐阅读顺序（针对你的研究方向）**：
+```
+PointWorld → DreamDojo → RISE
+```
+- **PointWorld 优先**：与你当前的跨形态重定向研究最接近
+- **DreamDojo 其次**：对应"人类数据 → 机器人世界模型"的规模化方向
+- **RISE 最后**：对应"高质量数据 → 世界模型 → RL 自提升"的完整闭环
 
 ---
 
