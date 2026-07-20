@@ -77,12 +77,12 @@
 | | Policy Gradient | REINFORCE, PPO, A2C/A3C | `docs/06-rl-fundamentals-for-vla.md` |
 | | Actor-Critic | SAC, TD3, DDPG | `docs/06-rl-fundamentals-for-vla.md` |
 | | VLA + RL | RLVF, BC+RL 两阶段, Hierarchical RL | `docs/06-rl-fundamentals-for-vla.md` |
-| **World Model** | Latent Dynamics | Dreamer V1/V2/V3, RSSM | `docs/07-world-models-for-vla.md` |
+| **World Model** | Latent Dynamics | Dreamer V1/V2/V3, RSSM | `tutorials/05-world-models/` |
 | | 隐式动力学 | MuZero, EfficientZero | `docs/07-world-models-for-vla.md` |
 | | Transformer/Diffusion | IRIS, DIAMOND, LaDi-WM | `docs/07-world-models-for-vla.md` |
 | | 非生成式 | V-JEPA, V-JEPA 2 | `docs/07-world-models-for-vla.md` |
 | | Foundation WM | Genie, UniSim, Cosmos | `docs/07-world-models-for-vla.md` |
-| | WM + VLA 融合 | 数据生成, 评估, 规划, WAM | `docs/07-world-models-for-vla.md` |
+| | WM + VLA 融合 | 数据生成, 评估, 规划, WAM | `examples/world_model_vla_pipeline.py` |
 | **面试** | DL 基础 | Transformer, LoRA, Flash Attention | `docs/05-interview-prep.md` |
 | | 算法深挖 | RT-2, OpenVLA, π0, Diffusion Policy | `docs/05-interview-prep.md` |
 | | 系统设计 | 端到端抓取, 跨平台 pipeline | `docs/05-interview-prep.md` |
@@ -98,7 +98,7 @@
 | **Stage 3** | VLA 搭建与推理 | 从零搭建 VLA、OpenVLA 推理、多指令对比 | `build_vla_from_scratch.py`, `openvla_inference_tutorial.py` | 2-3 天 |
 | **Stage 4** | 微调实践 | LoRA 微调、LIBERO 评估、自定义数据 | `finetune_libero.py`, `evaluate_libero.py` | 3-5 天 |
 | **进阶 A** | 强化学习 | MDP → PPO/SAC → BC+RL 两阶段训练 | `docs/06-rl-fundamentals-for-vla.md` | 1-2 天 |
-| **进阶 B** | 世界模型 | Dreamer/JEPA/DIAMOND → WM + VLA 融合 | `docs/07-world-models-for-vla.md` | 1-2 天 |
+| **Stage 5** | 世界模型 | RSSM → 四种 WM+VLA 融合方式（可运行 demo） | `tutorials/05-world-models/` | 2-3 天 |
 | **进阶 C** | 面试准备 | 88 道面试题（DL/RL/VLA/论文/系统设计） | `docs/05-interview-prep.md` | 随时复习 |
 
 ---
@@ -115,16 +115,20 @@ Embodied AI Zero to Hero/
 │   ├── 05-interview-prep.md              # 面试题 88 道（DL/RL/VLA/论文/系统设计）
 │   ├── 06-rl-fundamentals-for-vla.md     # 强化学习基础 + VLA 交叉应用
 │   └── 07-world-models-for-vla.md        # 世界模型指南（5 路线 + VLA 融合）
-├── tutorials/                             # 4 阶段实战教程
+├── tutorials/                             # 5 阶段实战教程
 │   ├── 01-vlm-basics/                    # CLIP、ViT、VLM 推理
 │   ├── 02-action-representation/        # FK/IK 动画、4 种动作表示
 │   ├── 03-simple-vla/                    # 从零搭建 VLA、OpenVLA 推理
-│   └── 04-fine-tuning/                   # LoRA 微调、LIBERO 评估、自定义数据
-├── examples/                              # 5 个可运行 demo
+│   ├── 04-fine-tuning/                   # LoRA 微调、LIBERO 评估、自定义数据
+│   └── 05-world-models/                  # 世界模型：RSSM、WM+VLA 四种融合方式
+├── examples/                              # 7 个可运行 demo
 │   ├── minimal_vla.py                    # 最小 VLA 架构（教学用）
 │   ├── inference_demo.py                  # OpenVLA 真实推理
 │   ├── sim_closed_loop_demo.py            # PyBullet 仿真闭环
 │   ├── visualize_vla.py                  # 动作轨迹/注意力/评估可视化
+│   ├── minimal_world_model.py            # 最小世界模型（Encoder+Transition+Reward）
+│   ├── world_model_vla_pipeline.py       # WM+VLA 四种融合方式对比
+│   ├── dreamer_rssm.py                   # RSSM 架构简化实现（Dreamer V3 核心）
 │   └── quick_start.ipynb                 # Colab 快速入门
 ├── setup/environment.yml                  # Conda 环境
 └── resources/README.md                    # 数据集/模型/工具索引
@@ -155,6 +159,11 @@ python tutorials/03-simple-vla/build_vla_from_scratch.py --num_epochs 50
 python tutorials/04-fine-tuning/finetune_libero.py \
     --vla_path openvla/openvla-7b --benchmark libero_spatial --batch_size 4 --lora_rank 32
 
+# Stage 5: 世界模型（仅需 CPU/GPU 均可）
+python examples/minimal_world_model.py --epochs 30
+python examples/world_model_vla_pipeline.py
+python examples/dreamer_rssm.py --epochs 25
+
 # 仿真闭环
 python examples/sim_closed_loop_demo.py --mode scripted
 ```
@@ -169,6 +178,7 @@ python examples/sim_closed_loop_demo.py --mode scripted
 | Stage 3 (搭建) | T4 16GB | A100 40GB | 量化 |
 | Stage 3 (OpenVLA) | T4 16GB | A100 40GB | ✗ |
 | Stage 4 (微调) | 4090 24GB | A100 80GB | ✗ |
+| Stage 5 (世界模型) | 无 | 无 | ✓ |
 | 仿真 demo | — | — | ✓ |
 
 省显存：`--batch_size 1 --grad_accumulation_steps 8 --load_in_8bit`（降至 27GB）。
