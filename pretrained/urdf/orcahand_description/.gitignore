@@ -1,0 +1,8 @@
+# ORCA Hand mesh files are too large (~560MB total, 970 STL files)
+# URDF and MJCF files are kept; download STL meshes from original repo:
+# https://github.com/orcahand/orcahand_description
+*.stl
+
+# Python artifacts
+__pycache__/
+*.pyc

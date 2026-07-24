@@ -1,0 +1,8 @@
+# 大文件不纳入 Git（超过 GitHub 100MB 限制）
+# 请使用 Git LFS 或手动同步
+*.tar.gz
+*.pkl
+*.pth
+
+# 保留 README
+!README.md

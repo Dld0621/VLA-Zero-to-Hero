@@ -1,41 +1,36 @@
-name: vla-zero
+name: embodied-ai
 channels:
-  - pytorch
-  - nvidia
   - conda-forge
   - defaults
 dependencies:
   - python=3.10
-  - pip
-  - pytorch>=2.0.0
-  - torchvision
-  - torchaudio
-  - pytorch-cuda=12.1
   - numpy
   - scipy
   - matplotlib
-  - pillow
-  - opencv
-  - tqdm
+  - jupyter
+  - pip
   - pip:
-    - transformers>=4.40.0
-    - peft>=0.4.0
-    - bitsandbytes>=0.41.0
-    - accelerate
+    # --- Retargeting / Simulation ---
+    - mujoco
+    - opencv-python
+    - mediapipe
+    # --- Deep Learning ---
+    - torch>=2.0
+    - torchvision
+    - transformers
     - datasets
+    - accelerate
     - einops
     - timm
-    - diffusers
-    - wandb
-    - hydra-core
-    - openvla
-    - huggingface-hub
-    - sentencepiece
-    - protobuf
-    - imageio
+    - tokenizers
+    # --- RL / World Models ---
     - gymnasium
-    - robosuite
+    - stable-baselines3
+    # --- VLA Fine-tuning ---
+    - peft
+    - bitsandbytes
+    - wandb
+    # --- Utilities ---
+    - tqdm
+    - pillow
     - pybullet
-    - dm-control
-    - mujoco
-    - imageio-ffmpeg

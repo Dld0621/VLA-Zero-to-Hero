@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>orcahand_description</name>
+  <version>0.1.0</version>
+  <description>URDF description of the ORCA hand</description>
+
+  <maintainer email="arturo.roberti@outlook.com">Arturo Roberti</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+
+  <export>
+    <architecture_independent/>
+  </export>
+</package>
