@@ -282,10 +282,11 @@ class ScriptedPolicy:
         4: "done",
     }
 
-    def __init__(self, action_dim: int = 7, client_id=None, cube_id=None):
+    def __init__(self, action_dim: int = 7, client_id=None, cube_id=None, gripper_id=None):
         self.action_dim = action_dim
         self.client_id = client_id
         self.cube_id = cube_id
+        self.gripper_id = gripper_id
         self.phase = self.PHASE_MOVE_ABOVE
         self.phase_timer = 0
         self.gripper_pos = 1.0  # 初始张开
@@ -296,10 +297,11 @@ class ScriptedPolicy:
         self.phase_timer = 0
         self.gripper_pos = 1.0
 
-    def set_environment(self, client_id: int, cube_id: int):
+    def set_environment(self, client_id: int, cube_id: int, gripper_id: int):
         """设置环境引用，用于获取物体位置。"""
         self.client_id = client_id
         self.cube_id = cube_id
+        self.gripper_id = gripper_id
 
     def _get_cube_pos(self) -> np.ndarray:
         """获取方块当前位置。"""
@@ -307,8 +309,9 @@ class ScriptedPolicy:
         return np.array(pos)
 
     def _get_gripper_pos(self) -> np.ndarray:
-        """获取当前夹爪位置（这里使用第一个 link 的状态）。"""
-        # 简化：使用 marker 的位置
+        """获取当前夹爪位置（这里使用 marker 的状态）。"""
+        if self.gripper_id is None:
+            raise RuntimeError("gripper_id 未设置。请通过 set_environment() 或 __init__ 传入 gripper_id。")
         pos, _ = p.getBasePositionAndOrientation(self.gripper_id, physicsClientId=self.client_id)
         return np.array(pos)
 
@@ -881,7 +884,7 @@ def main():
     if args.mode == "random":
         policy = RandomPolicy(action_dim=ACTION_DIM, seed=args.seed)
     elif args.mode == "scripted":
-        policy = ScriptedPolicy(action_dim=ACTION_DIM, client_id=client_id, cube_id=cube_id)
+        policy = ScriptedPolicy(action_dim=ACTION_DIM, client_id=client_id, cube_id=cube_id, gripper_id=gripper_id)
     elif args.mode == "minimal_vla":
         policy = MinimalVLAPolicy(action_dim=ACTION_DIM)
     else:

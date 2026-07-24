@@ -304,7 +304,7 @@ class HumanHandVisualizer:
         self.fig = plt.figure(figsize=figsize)
         self.ax = self.fig.add_subplot(111, projection='3d')
         self.ax.set_xlabel('X (m)')
-        self.ay = self.ax.set_ylabel('Y (m)')
+        self.ax.set_ylabel('Y (m)')
         self.ax.set_zlabel('Z (m)')
         self.ax.set_title('Human Hand 21-Point Landmarks')
 

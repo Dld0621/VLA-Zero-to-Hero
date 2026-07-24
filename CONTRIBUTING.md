@@ -1,0 +1,158 @@
+# 贡献指南
+
+> 感谢你对 Embodied AI Zero to Zero 项目的关注！本指南帮助你高效地参与贡献。
+
+## 项目定位
+
+本项目是一个**以文档和教程为核心的具身智能知识库**，目标受众从大一新生到前沿研究者。因此，贡献内容需要兼顾**准确性**、**可读性**和**可运行性**。
+
+---
+
+## 如何贡献
+
+### 1. 报告问题（Issue）
+
+发现内容错误、链接失效或代码 bug？请提交 Issue 并包含：
+
+- **问题类型**：`[bug]` / `[doc]` / `[link]` / `[suggestion]`
+- **位置**：文件路径 + 行号/章节
+- **当前内容**：复制错误片段
+- **预期内容**：你认为正确的版本
+- **依据**：论文链接、官方文档或实验结果
+
+示例：
+```
+[link] README.md 第 157 行 DIAMOND 仓库链接失效
+
+当前：https://github.com/ethz-rl/diamond（404）
+预期：https://github.com/eloialonso/diamond
+依据：论文作者 Vincent Micheli 的个人仓库
+```
+
+### 2. 提交代码/文档改进（Pull Request）
+
+#### 前置检查
+
+```bash
+# 1. 确保示例代码可运行
+cd examples
+python freshman_zero_to_one.py --gesture open --model shadow
+
+# 2. 检查新增依赖是否已记录
+# 修改 setup/environment.yml 和 requirements.txt
+
+# 3. 运行基础导入测试
+python -m pytest tests/ -v
+```
+
+#### PR 规范
+
+| 项目 | 要求 |
+|------|------|
+| **分支命名** | `fix/xxx`（修复）、`feat/xxx`（新功能）、`doc/xxx`（文档） |
+| **Commit 消息** | 遵循 Conventional Commits：`docs:`、`fix:`、`feat:`、`refactor:` |
+| **变更范围** | 一个 PR 只解决一个问题，避免大规模混合变更 |
+| **文档同步** | 修改代码后，同步更新对应文档中的描述、参数说明和运行示例 |
+
+#### Commit 消息示例
+
+```
+docs: 修正 IRIS 官方仓库链接（janner/iris -> eloialonso/iris）
+
+IRIS 论文原始代码由 Vincent Micheli 维护，
+仓库位于 eloialonso/iris，而非 janner/iris。
+
+修复文件：
+- README.md
+- docs/07-world-models-for-vla.md
+- docs/03-learning-path.md
+```
+
+---
+
+## 内容质量标准
+
+### 论文引用规范
+
+- **必须提供 arXiv 或官方会议链接**
+- **作者和机构信息需与论文一致**
+- **开源代码链接需手动验证**（点击确认可访问）
+- **不引用未公开或无法验证的内容**
+
+### 代码示例规范
+
+- **自包含优先**：示例应尽量不依赖外部文件，或提供自动下载脚本
+- **依赖检查**：在 `__main__` 或函数开头检查关键依赖，给出友好提示
+- **错误处理**：文件 I/O、网络请求、模型加载必须有 try/except
+- **类型提示**：新代码建议添加 Python 类型注解
+- **文档字符串**：每个公共函数/类必须有 docstring（Args/Returns）
+
+### 文档撰写规范
+
+- **术语统一**：首次出现缩写需给出全称（如 VLA (Vision-Language-Action)）
+- **公式可复现**：关键公式需注明符号含义，尽量提供对应代码链接
+- **分层表达**：同一概念提供"一句话直觉 + 技术细节 + 代码示例"三层描述
+- **引用锚定**：引用外部资源时给出具体章节/页码，而非仅链接
+
+---
+
+## 特定领域贡献建议
+
+### 补充前沿论文
+
+2026 年具身智能发展迅速，欢迎补充新论文：
+
+1. 在 `docs/16-arxiv-retargeting-scan.md` 添加扫描记录
+2. 在 `docs/18-frontier-papers-online.md` 补充在线链接
+3. 在 `docs/17-research-trends-and-positioning.md` 分析研究转向意义
+4. 更新 README.md 的"2026 前沿研究亮点"区块
+
+### 新增教程阶段
+
+`tutorials/` 目录的每个子目录应包含：
+
+```
+tutorials/XX-topic-name/
+├── README.md              # 概念讲解 + 步骤说明
+├── code_demo.py           # 可独立运行的示例代码（可选但推荐）
+└── assets/                # 示意图或数据文件（可选）
+```
+
+### 新增示例代码
+
+`examples/` 目录的新代码应满足：
+
+- 文件头包含模块 docstring（功能、依赖、运行命令）
+- 支持命令行参数解析（`argparse`）
+- 提供 `--help` 输出
+- 在 README.md 对应支柱表格中注册
+
+---
+
+## 审查清单（Reviewer Checklist）
+
+维护者在合并 PR 前将检查：
+
+- [ ] 外部链接已手动验证可访问
+- [ ] 新增/修改的代码可在干净环境中运行
+- [ ] 文档与代码描述一致
+- [ ] 术语和作者信息准确
+- [ ] 不引入未声明的新依赖
+- [ ] Commit 历史清晰、可回滚
+
+---
+
+## 社区行为准则
+
+- 尊重不同背景的学习者，避免假设对方已掌握特定前置知识
+- 技术讨论聚焦问题本身，不评价个人
+- 承认知识边界：不确定的内容明确标注"待验证"或"社区补充"
+
+---
+
+## 联系方式
+
+- **Issue 讨论**：GitHub Issues（推荐，便于归档检索）
+- **紧急链接修复**：可直接提 PR，标题前缀 `[urgent]`
+
+> 本项目采用 MIT 许可证。贡献即表示你同意将提交的内容按 MIT 许可证授权。

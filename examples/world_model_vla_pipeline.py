@@ -210,7 +210,8 @@ class WM_VLA_Pipeline:
     def fusion_1_data_generator(self, env, num_gen=100, seq_len=20):
         """融合方式 1：世界模型作为数据生成器。"""
         print("\n[融合方式 1] 世界模型作为数据生成器")
-        print("  用训练好的 WM 生成虚拟轨迹，再用虚拟数据训练新策略")
+        print("  用策略在环境中采样，结合 WM 的 reward 预测生成增强数据，再训练新策略")
+        print("  注：本 Demo 的 WM 无 decoder，observation 来自真实环境 step，reward 来自 WM 预测")
 
         self.wm.eval()
         policy_gen = PolicyNet(6, 2).to(self.device)
@@ -231,9 +232,14 @@ class WM_VLA_Pipeline:
                     synthetic_obs.append(obs)
                     synthetic_act.append(act.astype(np.float32))
 
-                    # WM 预测下一状态（近似：直接用真实 step，模拟"用 WM 展开"的效果）
-                    obs, rew, done = env.step(act)
-                    synthetic_rew.append(rew)
+                    # 真实环境 step 获取下一观测（WM 无 decoder，无法从 latent 重建 observation）
+                    obs, env_rew, done = env.step(act)
+                    # 同时用 WM 预测 reward 作为对比/增强信号
+                    with torch.no_grad():
+                        z_next = self.wm.encode(torch.FloatTensor(obs).unsqueeze(0).to(self.device))
+                        wm_rew = self.wm.predict_reward(z_next).item()
+                    # 混合 reward：真实环境 reward + WM 预测 reward（加权平均）
+                    synthetic_rew.append(0.5 * env_rew + 0.5 * wm_rew)
                     if done:
                         break
 
@@ -354,6 +360,13 @@ class WM_VLA_Pipeline:
         """融合方式 4：World Action Model（WM 直接输出动作）。"""
         print("\n[融合方式 4] World Action Model")
         print("  在 latent space 同时预测状态和动作，WM 本身就是策略")
+
+        if not hasattr(self, '_cached_data') or self._cached_data is None:
+            raise RuntimeError(
+                "fusion_4_wam 需要先调用 run() 方法生成训练数据。"
+                "示例：pipeline = WM_VLA_Pipeline(); pipeline.run()  # 先收集数据\n"
+                "      pipeline.fusion_4_wam(env)  # 再调用本方法"
+            )
 
         self.wm.eval()
 

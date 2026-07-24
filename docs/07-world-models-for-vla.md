@@ -594,7 +594,7 @@ PointWorld → DreamDojo → RISE
 ### 第三步：读 IRIS 或 DIAMOND 源码
 
 - **IRIS**：[官方实现](https://github.com/janner/iris) — Transformer-based，代码结构清晰
-- **DIAMOND**：[官方实现](https://github.com/ethz-rl/diamond) — Diffusion-based，可以对比与 Diffusion Policy 的架构异同
+- **DIAMOND**：[官方实现](https://github.com/eloialonso/diamond) — Diffusion-based，可以对比与 Diffusion Policy 的架构异同
 
 **阅读建议**：
 - 先看 World Model 部分（不看 RL 部分）
@@ -646,5 +646,5 @@ PointWorld → DreamDojo → RISE
 | [Yannic Kilcher — Dreamer/DIAMOND](https://www.youtube.com/c/YannicKilcher) | 视频 | 中等 | 论文精讲频道，Dreamer V3 / DIAMOND 均有覆盖 |
 | [NeurIPS 2020 MBRL Tutorial](https://sites.google.com/view/mbrl-tutorial) | 教程 | 进阶 | NeurIPS 官方 model-based RL 教程 |
 | [Lilian Weng — World Models](https://lilianweng.github.io/posts/2023-06-23-llm-agent/) | 博客 | 中等 | 世界模型与模型预测控制的系统梳理 |
-| [DIAMOND 官方实现](https://github.com/ethz-rl/diamond) | 代码 | 中等 | Diffusion 世界模型参考实现 |
-| [IRIS 官方实现](https://github.com/janner/iris) | 代码 | 中等 | Transformer 世界模型，代码结构清晰 |
+| [DIAMOND 官方实现](https://github.com/eloialonso/diamond) | 代码 | 中等 | Diffusion 世界模型参考实现 |
+| [IRIS 官方实现](https://github.com/eloialonso/iris) | 代码 | 中等 | Transformer 世界模型，代码结构清晰 |

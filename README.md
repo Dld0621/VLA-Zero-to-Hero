@@ -49,7 +49,7 @@
 | **重定向** | 人手运动映射到机器人灵巧手 | [Pipeline 详解](docs/12-freshman-zero-to-one.md) | [ freshman_zero_to_one.py](examples/freshman_zero_to_one.py) | [DexMV](https://github.com/yzqin/dexmv-sim) · [SPIDER](https://github.com/facebookresearch/spider) · [TopoRetarget](https://toporetarget2026.github.io/TopoRetarget/) |
 | **VLA** | 让机器人"看懂+听懂"再行动 | [Pipeline 详解](docs/13-vla-zero-to-one.md) | [vla_demo.py](examples/vla_demo.py) · [minimal_vla.py](examples/minimal_vla.py) | [OpenVLA](https://github.com/openvla/openvla) · [Octo](https://github.com/octo-models/octo) · [LeRobot](https://github.com/huggingface/lerobot) |
 | **RL** | 通过环境交互学习最优策略 | [Pipeline 详解](docs/14-rl-zero-to-one.md) | [rl_demo.py](examples/rl_demo.py) | [Stable Baselines3](https://stable-baselines3.readthedocs.io/) · [DexGraspNet](https://github.com/PKU-EPIC/DexGraspNet) |
-| **世界模型** | 预测世界变化，辅助规划与训练 | [Pipeline 详解](docs/15-world-model-zero-to-one.md) | [world_model_demo.py](examples/world_model_demo.py) · [dreamer_rssm.py](examples/dreamer_rssm.py) | [DIAMOND](https://github.com/ethz-rl/diamond) · [DreamDojo](https://github.com/NVIDIA/DreamDojo) · [PointWorld](https://github.com/NVlabs/PointWorld) |
+| **世界模型** | 预测世界变化，辅助规划与训练 | [Pipeline 详解](docs/15-world-model-zero-to-one.md) | [world_model_demo.py](examples/world_model_demo.py) · [dreamer_rssm.py](examples/dreamer_rssm.py) | [DIAMOND](https://github.com/eloialonso/diamond) · [DreamDojo](https://github.com/NVIDIA/DreamDojo) · [PointWorld](https://github.com/NVlabs/PointWorld) |
 
 ---
 
@@ -158,7 +158,7 @@
 | [DreamDojo](https://github.com/NVIDIA/DreamDojo) | 通用世界模型 | 4.4 万小时人类视频预训练 |
 | [RISE](https://github.com/OpenDriveLab/RISE) | 组合式世界模型 | 想象 RL + 真实机器人部署 |
 | [PointWorld](https://github.com/NVlabs/PointWorld) | 3D 跨本体世界模型 | 3D Point Flow + MPC 实时规划 |
-| [IRIS](https://github.com/janner/iris) | Transformer 世界模型 | 代码结构清晰，适合学习 |
+| [IRIS](https://github.com/eloialonso/iris) | Transformer 世界模型 | 代码结构清晰，适合学习 |
 
 ---
 
@@ -298,6 +298,13 @@ Embodied-AI-Zero-to-Zero/
 |   |-- environment.yml                # Conda 环境配置
 |-- resources/
 |   |-- README.md                      # 数据集/工具/模型/VLA 资源索引
+|-- tests/
+|   |-- test_imports.py                # 基础导入测试（Smoke Tests）
+|-- CONTRIBUTING.md                    # 贡献指南（PR 规范、审查清单）
+|-- CHANGELOG.md                       # 版本变更记录
+|-- requirements.txt                   # Pip 依赖文件
+|-- LICENSE                            # MIT 许可证
+|-- .gitignore                         # Git 忽略规则
 ```
 
 ---
